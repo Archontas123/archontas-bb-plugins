@@ -185,7 +185,7 @@ function App() {
               <span className="w-1.5 h-1.5 bg-meg-blue block"></span> ModelEngine Format
             </a>
             <a href="#item" className="text-gray-400 hover:text-item-green transition-colors flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-item-green block text-xs lowercase"></span> i.t.e.ms
+              <span className="w-1.5 h-1.5 bg-item-green block text-xs"></span> I.T.E.M
             </a>
             <a href="#install" className="text-gray-400 hover:text-accent-amber transition-colors flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-accent-amber block"></span> Installation
@@ -362,7 +362,7 @@ function App() {
           <div className="max-w-3xl space-y-4 mb-12">
 
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase leading-none">
-              <span className="normal-case">iterative texture editing macros FOR i.t.e.ms</span> / <span className="text-item-green font-pixel tracking-normal normal-case glow-text-green">item.js</span>
+              ITERATIVE TEXTURE EDITING MACROS FOR I.T.E.M / <span className="text-item-green font-pixel tracking-normal normal-case glow-text-green">item.js</span>
             </h2>
 
             <p className="text-gray-400 text-base sm:text-lg leading-relaxed text-left">
