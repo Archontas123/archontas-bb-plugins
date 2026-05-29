@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=VT323&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-pixel: 'VT323', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-voxel-bg: #0e0f13;
+  --color-voxel-card: #15161f;
+  --color-voxel-border: #232532;
+  
+  --color-meg-blue: #3b82f6;
+  --color-meg-glow: rgba(59, 130, 246, 0.15);
+  
+  --color-item-green: #10b981;
+  --color-item-glow: rgba(16, 185, 129, 0.15);
+  
+  --color-accent-amber: #f59e0b;
+}
+
+/* Custom creative patterns and micro-animations */
+.voxel-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.isometric-container {
+  perspective: 1000px;
+}
+
+/* 3D solid retro shadows for blocky design */
+.blocky-card {
+  background: var(--color-voxel-card);
+  border: 2px solid var(--color-voxel-border);
+  box-shadow: 4px 4px 0px #06070a;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.blocky-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px #06070a;
+}
+
+.blocky-button {
+  border: 2px solid currentColor;
+  box-shadow: 3px 3px 0px currentColor;
+  transition: all 0.1s ease-in-out;
+}
+
+.blocky-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px currentColor;
+}
+
+.blocky-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px currentColor;
+}
+
+/* Custom range input styling */
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #232532;
+  border-radius: 0;
+  outline: none;
+}
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  cursor: pointer;
+  border: 2px solid #0e0f13;
+}
+
+.custom-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  cursor: pointer;
+  border: 2px solid #0e0f13;
+}
+
+/* Low poly floating mesh decoration animation */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.floating-mesh {
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-mesh-slow {
+  animation: float 9s ease-in-out infinite;
+}
+
+/* Dynamic glowing text */
+.glow-text-blue {
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.glow-text-green {
+  text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Custom scrollbar matching dark design */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e0f13;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #232532;
+  border: 2px solid #0e0f13;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
