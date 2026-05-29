@@ -545,6 +545,9 @@ function App() {
           <div className="flex space-x-6">
             <a href="https://github.com/Archontas123/ModelEngine-Entity-BB-Plugin" target="_blank" className="hover:text-meg-blue transition-colors">MEG Repository</a>
             <a href="https://github.com/Archontas123/I.T.E.M-BB-Plugin" target="_blank" className="hover:text-item-green transition-colors">I.T.E.M Repository</a>
+            <a href="https://github.com/Archontas123/blockbench" target="_blank" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-accent-amber block animate-pulse"></span> Blockbench Fork (GPL-3.0)
+            </a>
           </div>
           <div>
             <span>Crafted using React + Vite + Tailwind CSS</span>
