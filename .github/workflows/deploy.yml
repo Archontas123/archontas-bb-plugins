@@ -5,17 +5,29 @@ on:
     branches:
       - main
 
-# Permissions required to check out code and push static assets to the gh-pages branch
+# Permissions required to deploy to GitHub Pages directly
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
+
+      - name: Setup Pages ⚙️
+        uses: actions/configure-pages@v5
 
       - name: Setup Node.js ⚙️
         uses: actions/setup-node@v4
@@ -28,8 +40,11 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload Pages Artifact 📤
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist # The folder the action should deploy.
-          branch: gh-pages # The branch the action should deploy to.
+          path: dist
+
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4
