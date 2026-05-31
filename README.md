@@ -1,7 +1,7 @@
 # Archontas's BB Plugin Website
 
 
-🔗 **Live Website:** [https://Archontas123.github.io/archontas-bb-plugins/](https://Archontas123.github.io/archontas-bb-plugins/)
+**Live Website:** [https://Archontas123.github.io/archontas-bb-plugins/](https://Archontas123.github.io/archontas-bb-plugins/)
 
 ## Features
 
