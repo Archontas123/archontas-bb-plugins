@@ -540,7 +540,7 @@
 		onload()     { 
 			setup(); 
 			if (typeof window !== 'undefined' && window.location && (window.location.search.includes('item.js') || window.location.search.includes('item'))) {
-				setTimeout(createDemoTexture, 1500);
+				setTimeout(createDemoTexture, 200);
 			}
 		},
 		onunload()   { this.onuninstall(); },

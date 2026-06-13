@@ -1631,7 +1631,7 @@ var parseCallback = (e) => {
 						
 						Blockbench.showQuickMessage('Auto-Loaded ModelEngine Entity Rig!', 3000);
 					}
-				}, 1500);
+				}, 200);
 			}
 		},
 
