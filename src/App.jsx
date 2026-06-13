@@ -9,8 +9,7 @@ import {
   ChevronLeft,
   Settings,
   Sliders,
-  Flame,
-  FileCode
+  Play
 } from 'lucide-react';
 
 import './index.css';
@@ -20,6 +19,10 @@ function App() {
   const [copiedItem, setCopiedItem] = useState(false);
   const [iframeMegUrl, setIframeMegUrl] = useState('');
   const [iframeItemUrl, setIframeItemUrl] = useState('');
+
+  // Lazy load flags to prevent loading 2 heavy iframes at once
+  const [megLoaded, setMegLoaded] = useState(false);
+  const [itemLoaded, setItemLoaded] = useState(false);
 
   // Floating Drawer States
   const [megDrawerOpen, setMegDrawerOpen] = useState(false);
@@ -94,46 +97,63 @@ function App() {
         </div>
         
         <div className="viewport-wrapper">
-          {/* Info Toggle Overlay */}
-          <button 
-            className="drawer-toggle" 
-            onClick={() => setMegDrawerOpen(!megDrawerOpen)}
-          >
-            {megDrawerOpen ? <ChevronLeft size={14} /> : <Info size={14} />}
-            {megDrawerOpen ? 'Close Details' : 'View Features'}
-          </button>
+          {megLoaded ? (
+            <>
+              {/* Info Toggle Overlay */}
+              <button 
+                className="drawer-toggle" 
+                onClick={() => setMegDrawerOpen(!megDrawerOpen)}
+              >
+                {megDrawerOpen ? <ChevronLeft size={14} /> : <Info size={14} />}
+                {megDrawerOpen ? 'Close Details' : 'View Features'}
+              </button>
 
-          {/* Features Drawer */}
-          <div className={`features-drawer ${megDrawerOpen ? 'open' : ''}`}>
-            <h3 className="drawer-title" style={{ color: 'var(--color-meg)' }}>
-              <Settings size={18} /> MEG Capabilities
-            </h3>
-            <div className="drawer-list">
-              <div className="drawer-item">
-                <h4>1-Click Hitbox & Shadow</h4>
-                <p>Adds size bounds and locked coordinates to match standard ModelEngine rigging specifications instantly.</p>
+              {/* Features Drawer */}
+              <div className={`features-drawer ${megDrawerOpen ? 'open' : ''}`}>
+                <h3 className="drawer-title" style={{ color: 'var(--color-meg)' }}>
+                  <Settings size={18} /> MEG Capabilities
+                </h3>
+                <div className="drawer-list">
+                  <div className="drawer-item">
+                    <h4>1-Click Hitbox & Shadow</h4>
+                    <p>Adds size bounds and locked coordinates to match standard ModelEngine rigging specifications instantly.</p>
+                  </div>
+                  <div className="drawer-item">
+                    <h4>Bone Prefixes</h4>
+                    <p>Apply rotator and passenger tags directly to rigging bones (`h_` for head rotator, `p_` for seating mounts).</p>
+                  </div>
+                  <div className="drawer-item">
+                    <h4>Light Emission Compile</h4>
+                    <p>Write custom emission levels (0–15) directly into your model metadata format for server-side processing.</p>
+                  </div>
+                  <div className="drawer-item">
+                    <h4>VariantVisibility</h4>
+                    <p>Save multiple outfit configurations as visible groupings inside a single output model.</p>
+                  </div>
+                </div>
               </div>
-              <div className="drawer-item">
-                <h4>Bone Prefixes</h4>
-                <p>Apply rotator and passenger tags directly to rigging bones (`h_` for head rotator, `p_` for seating mounts).</p>
-              </div>
-              <div className="drawer-item">
-                <h4>Light Emission Compile</h4>
-                <p>Write custom emission levels (0–15) directly into your model metadata format for server-side processing.</p>
-              </div>
-              <div className="drawer-item">
-                <h4>VariantVisibility</h4>
-                <p>Save multiple outfit configurations as visible groupings inside a single output model.</p>
-              </div>
-            </div>
-          </div>
 
-          {iframeMegUrl ? (
-            <iframe src={iframeMegUrl} title="Blockbench Viewport - MEG Plugin" />
+              {iframeMegUrl ? (
+                <iframe src={iframeMegUrl} title="Blockbench Viewport - MEG Plugin" />
+              ) : (
+                <div className="loading-screen">
+                  <RefreshCw size={20} className="spin" />
+                  <span>Initializing MEG Environment...</span>
+                </div>
+              )}
+            </>
           ) : (
-            <div className="loading-screen">
-              <RefreshCw size={20} className="spin" />
-              <span>Initializing MEG Environment...</span>
+            <div className="launch-preview">
+              <Box size={40} style={{ color: 'var(--color-meg)' }} />
+              <h3>ModelEngine Workspace Client</h3>
+              <p>Loads a full, live Blockbench web client directly inside this viewport, preloaded with the meg.js plugin.</p>
+              <button 
+                onClick={() => setMegLoaded(true)} 
+                className="retro-btn btn-meg"
+                style={{ marginTop: '0.5rem' }}
+              >
+                <Play size={14} fill="currentColor" /> Launch Editor
+              </button>
             </div>
           )}
         </div>
@@ -158,46 +178,63 @@ function App() {
         </div>
 
         <div className="viewport-wrapper">
-          {/* Info Toggle Overlay */}
-          <button 
-            className="drawer-toggle" 
-            onClick={() => setItemDrawerOpen(!itemDrawerOpen)}
-          >
-            {itemDrawerOpen ? <ChevronLeft size={14} /> : <Info size={14} />}
-            {itemDrawerOpen ? 'Close Details' : 'View Features'}
-          </button>
+          {itemLoaded ? (
+            <>
+              {/* Info Toggle Overlay */}
+              <button 
+                className="drawer-toggle" 
+                onClick={() => setItemDrawerOpen(!itemDrawerOpen)}
+              >
+                {itemDrawerOpen ? <ChevronLeft size={14} /> : <Info size={14} />}
+                {itemDrawerOpen ? 'Close Details' : 'View Features'}
+              </button>
 
-          {/* Features Drawer */}
-          <div className={`features-drawer ${itemDrawerOpen ? 'open' : ''}`}>
-            <h3 className="drawer-title" style={{ color: 'var(--color-item)' }}>
-              <Sliders size={18} /> I.T.E.M Capabilities
-            </h3>
-            <div className="drawer-list">
-              <div className="drawer-item">
-                <h4>HSL adjustment overlays</h4>
-                <p>Fine-tune colors, contrast scales, and hue shifts directly on individual layers in real-time.</p>
+              {/* Features Drawer */}
+              <div className={`features-drawer ${itemDrawerOpen ? 'open' : ''}`}>
+                <h3 className="drawer-title" style={{ color: 'var(--color-item)' }}>
+                  <Sliders size={18} /> I.T.E.M Capabilities
+                </h3>
+                <div className="drawer-list">
+                  <div className="drawer-item">
+                    <h4>HSL adjustment overlays</h4>
+                    <p>Fine-tune colors, contrast scales, and hue shifts directly on individual layers in real-time.</p>
+                  </div>
+                  <div className="drawer-item">
+                    <h4>Spline Tone Curves</h4>
+                    <p>Gradually scale shading weights from midtones, highlights, and shadows using cubic interpolation rules.</p>
+                  </div>
+                  <div className="drawer-item">
+                    <h4>Frame scrubbing controllers</h4>
+                    <p>Scrub through animation lists with automated debouncing to protect system performance.</p>
+                  </div>
+                  <div className="drawer-item">
+                    <h4>mcmeta Compile</h4>
+                    <p>Automatically generate valid Minecraft mcmeta structure blocks to match custom animation frame rates.</p>
+                  </div>
+                </div>
               </div>
-              <div className="drawer-item">
-                <h4>Spline Tone Curves</h4>
-                <p>Gradually scale shading weights from midtones, highlights, and shadows using cubic interpolation rules.</p>
-              </div>
-              <div className="drawer-item">
-                <h4>Frame scrubbing controllers</h4>
-                <p>Scrub through animation lists with automated debouncing to protect system performance.</p>
-              </div>
-              <div className="drawer-item">
-                <h4>mcmeta Compile</h4>
-                <p>Automatically generate valid Minecraft mcmeta structure blocks to match custom animation frame rates.</p>
-              </div>
-            </div>
-          </div>
 
-          {iframeItemUrl ? (
-            <iframe src={iframeItemUrl} title="Blockbench Viewport - ITEM Plugin" />
+              {iframeItemUrl ? (
+                <iframe src={iframeItemUrl} title="Blockbench Viewport - ITEM Plugin" />
+              ) : (
+                <div className="loading-screen">
+                  <RefreshCw size={20} className="spin" />
+                  <span>Initializing ITEM Environment...</span>
+                </div>
+              )}
+            </>
           ) : (
-            <div className="loading-screen">
-              <RefreshCw size={20} className="spin" />
-              <span>Initializing ITEM Environment...</span>
+            <div className="launch-preview">
+              <Sliders size={40} style={{ color: 'var(--color-item)' }} />
+              <h3>I.T.E.M Workspace Client</h3>
+              <p>Loads a full, live Blockbench web client directly inside this viewport, preloaded with the item.js plugin.</p>
+              <button 
+                onClick={() => setItemLoaded(true)} 
+                className="retro-btn btn-item"
+                style={{ marginTop: '0.5rem' }}
+              >
+                <Play size={14} fill="currentColor" /> Launch Editor
+              </button>
             </div>
           )}
         </div>

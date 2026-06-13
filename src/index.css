@@ -242,6 +242,33 @@ body {
   border: none;
 }
 
+/* Lazy Load Launch Screens */
+.launch-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.005) 0%, transparent 80%);
+  gap: 1.25rem;
+}
+
+.launch-preview h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.launch-preview p {
+  font-size: 0.85rem;
+  color: #64748b;
+  max-width: 340px;
+  line-height: 1.5;
+}
+
 /* Floating Drawer Toggle */
 .drawer-toggle {
   position: absolute;
